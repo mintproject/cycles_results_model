@@ -6,5 +6,7 @@ WEED_FRACTION=$8
 
 HOST="https://cycles-results.mint.isi.edu"
 
-echo "date,country,admin1,admin2,admin3,crop_production,grain_yield"
-curl -s "$HOST/getCyclesResults/$CROP_NAME/$START_PLANTING_DAY/$FERTILIZER_RATE/$WEED_FRACTION"
+mkdir -p outputs
+
+echo "date,country,admin1,admin2,admin3,crop_production,grain_yield" > outputs/cycles-output.csv
+curl -s "$HOST/getCyclesResults/$CROP_NAME/$START_PLANTING_DAY/$FERTILIZER_RATE/$WEED_FRACTION" >> outputs/cycles-output.csv
