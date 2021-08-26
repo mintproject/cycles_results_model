@@ -6,8 +6,6 @@ WEED_FRACTION=$4
 
 OUTPUT_FILE=$5
 
-DBHOST="cycles-results.mint.isi.edu"
-DBUSER="dojo"
+HOST="https://cycles-results.mint.isi.edu"
 
-export PGPASSWORD="mellowcubicle"
-psql -U $DBUSER -h $DBHOST -d cycles -c "\copy (SELECT date,country,admin1,admin2,admin3,production,grain_yield FROM cycles_results WHERE crop_name='$CROP_NAME' AND start_planting_day=$START_PLANTING_DAY AND fertilizer_rate=$FERTILIZER_RATE AND weed_fraction='$WEED_FRACTION') TO '$OUTPUT_FILE' WITH CSV"
+curl -s "$HOST/getCyclesResults/$CROP_NAME/$START_PLANTING_DAY/$FERTILIZER_RATE/$WEED_FRACTION" > $OUTPUT_FILE
